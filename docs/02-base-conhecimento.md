@@ -2,17 +2,14 @@
 
 ## Dados Utilizados
 
-Descreva se usou os arquivos da pasta `data`, por exemplo:
-
-| Arquivo | Formato | Utilização no Agente |
+| Dado | Formato | Utilização no Agente |
 |---------|---------|---------------------|
-| `historico_atendimento.csv` | CSV | Contextualizar interações anteriores |
-| `perfil_investidor.json` | JSON | Personalizar recomendações |
-| `produtos_financeiros.json` | JSON | Sugerir produtos adequados ao perfil |
-| `transacoes.csv` | CSV | Analisar padrão de gastos do cliente |
-
-> [!TIP]
-> **Quer um dataset mais robusto?** Você pode utilizar datasets públicos do [Hugging Face](https://huggingface.co/datasets) relacionados a finanças, desde que sejam adequados ao contexto do desafio.
+| Renda mensal | Numérico | Analisar capacidade financeira |
+| Despesas fixas | Numérico | Avaliar comprometimento da renda |
+| Despesas variáveis | Numérico | Analisar gastos e saldo mensal |
+| Reserva financeira | Numérico | Avaliar situação da reserva |
+| Dívidas | Numérico | Identificar comprometimento financeiro |
+| Objetivos financeiros | Texto | Orientar o planejamento financeiro |
 
 ---
 
@@ -20,7 +17,7 @@ Descreva se usou os arquivos da pasta `data`, por exemplo:
 
 > Você modificou ou expandiu os dados mockados? Descreva aqui.
 
-[Sua descrição aqui]
+Não são utilizados dados mockados. As informações financeiras são coletadas diretamente do usuário e estruturadas durante a sessão.
 
 ---
 
@@ -29,12 +26,12 @@ Descreva se usou os arquivos da pasta `data`, por exemplo:
 ### Como os dados são carregados?
 > Descreva como seu agente acessa a base de conhecimento.
 
-[ex: Os JSON/CSV são carregados no início da sessão e incluídos no contexto do prompt]
+Os dados são coletados durante a conversa e armazenados em uma estrutura Python na memória da aplicação, permanecendo disponíveis apenas durante a sessão.
 
 ### Como os dados são usados no prompt?
 > Os dados vão no system prompt? São consultados dinamicamente?
 
-[Sua descrição aqui]
+Os dados financeiros estruturados e os indicadores calculados pelo Python são inseridos dinamicamente no contexto enviado ao LLM para gerar respostas personalizadas.
 
 ---
 
@@ -43,13 +40,15 @@ Descreva se usou os arquivos da pasta `data`, por exemplo:
 > Mostre um exemplo de como os dados são formatados para o agente.
 
 ```
-Dados do Cliente:
-- Nome: João Silva
-- Perfil: Moderado
-- Saldo disponível: R$ 5.000
+Contexto financeiro do usuário:
+- Renda mensal: R$ 3.500
+- Despesas fixas: R$ 1.800
+- Despesas variáveis: R$ 700
+- Reserva financeira: R$ 0
+- Dívidas: R$ 0
+- Objetivo: Comprar um carro
 
-Últimas transações:
-- 01/11: Supermercado - R$ 450
-- 03/11: Streaming - R$ 55
-...
+Indicadores:
+- Saldo mensal estimado: R$ 1.000
+- Situação da reserva: Inexistente
 ```
