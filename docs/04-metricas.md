@@ -1,11 +1,16 @@
 # Avaliação e Métricas
 
-## Como Avaliar seu Agente
+## Como Avaliar o Agente
 
-A avaliação pode ser feita de duas formas complementares:
+A avaliação do Norte foi realizada por meio de testes estruturados, verificando o comportamento do agente em diferentes situações de uso.
 
-1. **Testes estruturados:** Você define perguntas e respostas esperadas;
-2. **Feedback real:** Pessoas testam o agente e dão notas.
+Os testes foram utilizados para verificar principalmente:
+
+1. **Assertividade:** capacidade de utilizar corretamente os dados fornecidos e responder de acordo com a solicitação do usuário;
+2. **Segurança:** capacidade de respeitar o escopo, evitar a invenção de informações e reconhecer quando não possui dados suficientes;
+3. **Coerência:** capacidade de utilizar o contexto financeiro e histórico da conversa para produzir orientações compatíveis com a situação apresentada;
+4. **Extração de dados:** capacidade de identificar informações financeiras presentes nas mensagens e estruturá-las corretamente;
+5. **Continuidade de contexto:** capacidade de utilizar informações fornecidas em mensagens anteriores durante a conversa.
 
 ---
 
@@ -13,38 +18,40 @@ A avaliação pode ser feita de duas formas complementares:
 
 | Métrica | O que avalia | Exemplo de teste |
 |---------|--------------|------------------|
-| **Assertividade** | O agente respondeu o que foi perguntado? | Perguntar o saldo e receber o valor correto |
-| **Segurança** | O agente evitou inventar informações? | Perguntar algo fora do contexto e ele admitir que não sabe |
-| **Coerência** | A resposta faz sentido para o perfil do cliente? | Sugerir investimento conservador para cliente conservador |
-
-> [!TIP]
-> Peça para 3-5 pessoas (amigos, família, colegas) testarem seu agente e avaliarem cada métrica com notas de 1 a 5. Isso torna suas métricas mais confiáveis! Caso use os arquivos da pasta `data`, lembre-se de contextualizar os participantes sobre o **cliente fictício** representado nesses dados.
+| **Assertividade** | O agente utiliza corretamente os dados disponíveis para responder à solicitação? | Informar renda e despesas e solicitar uma análise da situação |
+| **Segurança** | O agente respeita o escopo e evita inventar informações? | Perguntar sobre um assunto fora do escopo ou solicitar uma informação que não foi fornecida |
+| **Coerência** | A orientação é compatível com o contexto financeiro apresentado? | Informar renda, despesas e um objetivo e solicitar uma orientação |
+| **Extração de dados** | O agente identifica e estrutura corretamente as informações financeiras fornecidas? | Informar renda, despesas, reserva e objetivo em uma mesma mensagem |
+| **Continuidade de contexto** | O agente consegue utilizar informações fornecidas anteriormente na conversa? | Informar um objetivo em uma mensagem e fazer uma pergunta sobre ele posteriormente |
 
 ---
 
 ## Exemplos de Cenários de Teste
 
-Crie testes simples para validar seu agente:
+### Teste 1: Análise do orçamento
+- **Pergunta:** "Eu ganho R$ 3.500 por mês, tenho R$ 1.800 de despesas fixas e R$ 700 de despesas variáveis. Como está minha situação?"
+- **Resposta esperada:** O agente utiliza os dados fornecidos e apresenta uma análise coerente da situação financeira.
+- **Resultado:** [x] Correto  [ ] Incorreto
 
-### Teste 1: Consulta de gastos
-- **Pergunta:** "Quanto gastei com alimentação?"
-- **Resposta esperada:** Valor baseado no `transacoes.csv`
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 2: Extração e acumulação de dados
+- **Pergunta:** Informar a renda em uma mensagem, as despesas em outra e a reserva financeira em uma terceira.
+- **Resposta esperada:** As informações são identificadas e acumuladas corretamente na estrutura de dados da sessão.
+- **Resultado:** [x] Correto  [ ] Incorreto
 
-### Teste 2: Recomendação de produto
-- **Pergunta:** "Qual investimento você recomenda para mim?"
-- **Resposta esperada:** Produto compatível com o perfil do cliente
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 3: Objetivo financeiro
+- **Pergunta:** "Quero comprar um carro de R$ 50.000 em 2 anos."
+- **Resposta esperada:** O agente reconhece a compra como um objetivo financeiro e utiliza o valor e o prazo informados para orientar a análise.
+- **Resultado:** [x] Correto  [ ] Incorreto
 
-### Teste 3: Pergunta fora do escopo
-- **Pergunta:** "Qual a previsão do tempo?"
-- **Resposta esperada:** Agente informa que só trata de finanças
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 4: Continuidade da conversa
+- **Pergunta:** Após informar o objetivo de comprar um carro por R$ 50.000 em 2 anos, perguntar: "Quanto eu precisaria guardar por mês?"
+- **Resposta esperada:** O agente utiliza o objetivo informado anteriormente e relaciona o valor e o prazo à situação financeira apresentada.
+- **Resultado:** [x] Correto  [ ] Incorreto
 
-### Teste 4: Informação inexistente
-- **Pergunta:** "Quanto rende o produto XYZ?"
-- **Resposta esperada:** Agente admite não ter essa informação
-- **Resultado:** [ ] Correto  [ ] Incorreto
+### Teste 5: Pergunta fora do escopo
+- **Pergunta:** "Qual a previsão do tempo para amanhã?"
+- **Resposta esperada:** O agente informa que o assunto está fora de seu escopo e redireciona a conversa para organização financeira.
+- **Resultado:** [x] Correto  [ ] Incorreto
 
 ---
 
@@ -53,19 +60,33 @@ Crie testes simples para validar seu agente:
 Após os testes, registre suas conclusões:
 
 **O que funcionou bem:**
-- [Liste aqui]
+- O agente conseguiu extrair informações financeiras das mensagens e armazená-las corretamente durante a sessão.
+- As informações fornecidas em mensagens diferentes foram acumuladas sem sobrescrever os dados anteriores.
+- Os cálculos de total de despesas, saldo mensal e comprometimento da renda foram realizados pela aplicação em Python.
+- O LLM conseguiu utilizar os indicadores calculados pela aplicação para contextualizar suas respostas.
+- O histórico da conversa permitiu que o agente recuperasse informações apresentadas anteriormente sem que o usuário precisasse repeti-las.
+- O agente apresentou comportamento adequado diante de perguntas fora do escopo e solicitações de recomendações de investimento.
+- O agente foi capaz de reconhecer objetivos financeiros mesmo quando o usuário não utilizou explicitamente a palavra "objetivo".
+- Ajustes no System Prompt e no prompt de extração foram suficientes para corrigir comportamentos inadequados observados durante os testes.
 
 **O que pode melhorar:**
-- [Liste aqui]
+- A extração de informações ainda depende da interpretação do LLM e pode apresentar limitações diante de mensagens ambíguas ou com informações incompletas.
+- A aplicação mantém os dados financeiros apenas durante a sessão, não possuindo persistência após o encerramento da aplicação.
+- A avaliação realizada foi predominantemente funcional e qualitativa, não tendo sido realizada uma coleta estruturada de notas com um grupo de usuários.
+- O projeto utiliza um modelo local, portanto o tempo de resposta pode variar de acordo com o hardware disponível para execução do Ollama.
 
 ---
 
 ## Métricas Avançadas (Opcional)
 
-Para quem quer explorar mais, algumas métricas técnicas de observabilidade também podem fazer parte da sua solução, como:
+Nesta versão do projeto, não foram implementadas ferramentas específicas de observabilidade ou métricas avançadas de LLM.
+
+Como possíveis evoluções futuras, poderiam ser monitorados:
 
 - Latência e tempo de resposta;
-- Consumo de tokens e custos;
-- Logs e taxa de erros.
+- Taxa de erros;
+- Número de interações;
+- Falhas na extração de dados;
+- Consumo de recursos durante a execução do modelo local.
 
-Ferramentas especializadas em LLMs, como [LangWatch](https://langwatch.ai/) e [LangFuse](https://langfuse.com/), são exemplos que podem ajudar nesse monitoramento. Entretanto, fique à vontade para usar qualquer outra que você já conheça!
+Ferramentas especializadas de observabilidade de aplicações com LLMs poderiam ser utilizadas em uma versão futura caso houvesse necessidade de monitoramento mais detalhado.
