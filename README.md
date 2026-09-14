@@ -1,149 +1,335 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# Norte — Agente Inteligente para Saúde Financeira Pessoal
 
-## Contexto
+O **Norte** é um agente conversacional de inteligência artificial desenvolvido para ajudar na **organização das finanças pessoais**.
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
+Em vez de trabalhar com dados financeiros previamente cadastrados, o agente coleta as informações diretamente durante a conversa, estrutura esses dados e utiliza indicadores calculados pela aplicação para oferecer orientações contextualizadas.
 
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
-
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+> Projeto desenvolvido como projeto final do bootcamp **Accenture - Python para Análise e Automação de Dados**, da DIO.
 
 ---
 
-## O Que Você Deve Entregar
+## Sobre o projeto
 
-### 1. Documentação do Agente
+O Norte foi desenvolvido para pessoas que desejam compreender melhor sua situação financeira e identificar prioridades para organizar suas finanças.
 
-Defina **o que** seu agente faz e **como** ele funciona:
+Durante a conversa, o usuário pode fornecer informações como:
 
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
+- Renda mensal;
+- Despesas fixas;
+- Despesas variáveis;
+- Reserva financeira;
+- Dívidas;
+- Objetivos financeiros.
 
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+A partir dessas informações, o sistema mantém um contexto financeiro durante a sessão e pode analisar aspectos como:
 
----
+- Total de despesas;
+- Saldo mensal;
+- Comprometimento da renda;
+- Relação entre orçamento e objetivos financeiros.
 
-### 2. Base de Conhecimento
-
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
-
-| Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `transacoes.csv` | CSV | Histórico de transações do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
-| `perfil_investidor.json` | JSON | Perfil e preferências do cliente |
-| `produtos_financeiros.json` | JSON | Produtos e serviços disponíveis |
-
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
-
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
+O agente utiliza essas informações para conduzir a conversa e apresentar orientações de forma simples e contextualizada.
 
 ---
 
-### 3. Prompts do Agente
+## Como funciona
 
-Documente os prompts que definem o comportamento do seu agente:
+O processamento do Norte combina **Python** e um **modelo de linguagem local**.
 
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
+O fluxo principal é:
 
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
-
----
-
-### 4. Aplicação Funcional
-
-Desenvolva um **protótipo funcional** do seu agente:
-
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
-
-📁 **Pasta:** [`src/`](./src/)
-
----
-
-### 5. Avaliação e Métricas
-
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
-
----
-
-## Ferramentas Sugeridas
-
-Todas as ferramentas abaixo possuem versões gratuitas:
-
-| Categoria | Ferramentas |
-|-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
-
----
-
-## Estrutura do Repositório
-
-```
-📁 lab-agente-financeiro/
-│
-├── 📄 README.md
-│
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
-│
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
-│
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
+```text
+Usuário
+   ↓
+Streamlit
+   ↓
+Extração de informações pelo LLM
+   ↓
+Validação dos dados
+   ↓
+Atualização do contexto financeiro
+   ↓
+Cálculo dos indicadores pelo Python
+   ↓
+Contexto + histórico da conversa
+   ↓
+LLM
+   ↓
+Orientação personalizada
 ```
 
+A divisão de responsabilidades é intencional:
+
+| Responsabilidade | Componente |
+|---|---|
+| Interface | Streamlit |
+| Gerenciamento da sessão | Python / Streamlit |
+| Extração de informações | LLM |
+| Validação dos dados | Python |
+| Cálculos financeiros | Python |
+| Interpretação do contexto | LLM |
+| Geração das respostas | LLM |
+| Regras de comportamento | Prompts |
+
+Dessa forma, cálculos determinísticos não ficam sob responsabilidade do modelo de linguagem.
+
 ---
 
-## Dicas Finais
+## Inteligência Artificial
 
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
+O Norte utiliza o **Qwen3 8B**, executado localmente através do **Ollama**.
+
+O modelo é utilizado para:
+
+- Extrair informações financeiras das mensagens;
+- Interpretar o contexto financeiro;
+- Manter a continuidade da conversa;
+- Identificar quando são necessárias informações adicionais;
+- Gerar orientações dentro do escopo do agente.
+
+A execução local elimina a necessidade de utilizar uma API externa de LLM para o funcionamento do protótipo.
+
+---
+
+## Escopo
+
+O Norte foi projetado para atuar especificamente nos seguintes assuntos:
+
+- Organização financeira;
+- Orçamento;
+- Reserva financeira;
+- Objetivos financeiros.
+
+### Fora do escopo
+
+O agente não:
+
+- Fornece recomendações de investimentos;
+- Realiza operações ou movimentações financeiras;
+- Toma decisões financeiras pelo usuário;
+- Atua como consultor sobre produtos ou serviços relacionados aos objetivos;
+- Responde a assuntos completamente fora de seu domínio;
+- Inventa informações financeiras, preços, taxas ou dados sobre o usuário.
+
+Quando não possui informações suficientes, o agente reconhece a limitação e solicita os dados necessários.
+
+---
+
+## Exemplo de interação
+
+O usuário pode fornecer informações aos poucos durante a conversa:
+
+```text
+Usuário:
+Eu ganho R$ 3.500 por mês.
+
+Norte:
+Entendi. Já tenho sua renda mensal. Se quiser, podemos analisar
+ também suas despesas para entender melhor seu orçamento.
+
+Usuário:
+Tenho R$ 1.800 de despesas fixas e uns R$ 700 de despesas variáveis.
+
+Norte:
+Com esses dados, suas despesas somam R$ 2.500 e seu saldo mensal
+estimado é de R$ 1.000. Podemos analisar como esse valor se relaciona
+com suas prioridades e objetivos.
+
+Usuário:
+Quero comprar um carro de R$ 50.000 em 2 anos.
+
+Norte:
+Entendi. Podemos tratar a compra como um objetivo financeiro.
+A partir do valor e do prazo que você informou, podemos analisar
+quanto seria necessário reservar mensalmente e como isso se encaixa
+no seu orçamento.
+```
+
+Os valores utilizados no exemplo são apenas ilustrativos.
+
+---
+
+## Tecnologias
+
+- **Python** — lógica da aplicação, validação e cálculos;
+- **Streamlit** — interface conversacional;
+- **Ollama** — execução local do modelo de linguagem;
+- **Qwen3 8B** — modelo de linguagem utilizado pelo agente;
+- **JSON** — estruturação dos dados financeiros durante a sessão;
+- **Git/GitHub** — versionamento e disponibilização do projeto.
+
+---
+
+## Estrutura do projeto
+
+```text
+norte-personal-finance/
+│
+├── assets/
+│
+├── data/
+│
+├── docs/
+│   ├── 01-documentacao-agente.md
+│   ├── 02-base-conhecimento.md
+│   ├── 03-prompts.md
+│   ├── 04-metricas.md
+│   └── 05-pitch.md
+│
+├── examples/
+│
+├── src/
+│   ├── app.py
+│   ├── agente.py
+│   ├── config.py
+│   ├── prompts.py
+│   ├── requirements.txt
+│   └── README.md
+│
+├── .gitignore
+└── README.md
+```
+
+### Documentação
+
+A pasta [`docs/`](./docs/) contém os detalhes do desenvolvimento:
+
+- [`01-documentacao-agente.md`](./docs/01-documentacao-agente.md) — caso de uso, persona, arquitetura e segurança;
+- [`02-base-conhecimento.md`](./docs/02-base-conhecimento.md) — estrutura e utilização dos dados;
+- [`03-prompts.md`](./docs/03-prompts.md) — prompts, exemplos de interação e aprendizados;
+- [`04-metricas.md`](./docs/04-metricas.md) — avaliação e cenários de teste;
+- [`05-pitch.md`](./docs/05-pitch.md) — material utilizado para apresentação do projeto.
+
+A documentação técnica específica da implementação está disponível em [`src/README.md`](./src/README.md).
+
+---
+
+## Instalação
+
+### Pré-requisitos
+
+É necessário ter instalado:
+
+- Python 3;
+- Ollama.
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/vspessoa0/norte-personal-finance.git
+cd norte-personal-finance
+```
+
+### 2. Crie e ative o ambiente virtual
+
+No Windows:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+### 3. Instale as dependências
+
+```bash
+pip install -r src/requirements.txt
+```
+
+### 4. Baixe o modelo
+
+```bash
+ollama pull qwen3:8b
+```
+
+### 5. Execute a aplicação
+
+```bash
+streamlit run src/app.py
+```
+
+Após iniciar, o Streamlit disponibilizará a aplicação no navegador.
+
+---
+
+## Dados e privacidade
+
+Os dados financeiros utilizados pelo Norte são fornecidos pelo próprio usuário durante a conversa e permanecem disponíveis apenas durante a sessão da aplicação.
+
+O projeto **não utiliza banco de dados nem possui persistência dos dados financeiros após o encerramento da sessão**.
+
+O modelo de linguagem também é executado localmente através do Ollama.
+
+> Apesar da execução local, este projeto é um protótipo educacional e não deve ser utilizado como substituto de orientação financeira profissional.
+
+---
+
+## Avaliação
+
+O agente foi avaliado por meio de testes funcionais envolvendo:
+
+- Assertividade das respostas;
+- Segurança e respeito ao escopo;
+- Coerência com o contexto financeiro;
+- Extração de dados;
+- Continuidade da conversa;
+- Tratamento de informações insuficientes;
+- Tratamento de solicitações fora do escopo.
+
+Os resultados e cenários utilizados na avaliação estão documentados em [`docs/04-metricas.md`](./docs/04-metricas.md).
+
+---
+
+## Principais aprendizados
+
+O desenvolvimento do Norte demonstrou que um LLM não precisa ser responsável por todas as etapas do processamento.
+
+A aplicação combina:
+
+**Python**
+- Estruturação dos dados;
+- Validação;
+- Cálculos determinísticos;
+- Gerenciamento do contexto.
+
+**LLM**
+- Interpretação da linguagem natural;
+- Extração de informações;
+- Condução da conversa;
+- Geração das orientações.
+
+Essa divisão permite aproveitar a flexibilidade dos modelos de linguagem sem delegar ao LLM operações que podem ser realizadas de forma determinística pela aplicação.
+
+---
+
+## Limitações
+
+Esta versão do Norte possui algumas limitações:
+
+- Os dados são mantidos somente durante a sessão;
+- A extração de informações depende da interpretação do modelo de linguagem;
+- Mensagens ambíguas ou incompletas podem exigir novas perguntas ao usuário;
+- O tempo de resposta depende do hardware utilizado para executar o modelo localmente;
+- A avaliação realizada foi predominantemente funcional e qualitativa.
+
+---
+
+## Próximos passos
+
+Como possíveis evoluções futuras, o projeto poderia incorporar:
+
+- Persistência opcional dos dados;
+- Histórico financeiro entre sessões;
+- Monitoramento mais detalhado das interações;
+- Métricas automatizadas de qualidade;
+- Melhorias na extração de informações;
+- Novos indicadores de saúde financeira.
+
+Essas funcionalidades não fazem parte do escopo atual do protótipo.
+
+---
+
+## Autor
+
+**Vinicius Pessoa**
+
+Projeto desenvolvido para conclusão do bootcamp **Accenture - Python para Análise e Automação de Dados**, da DIO.
