@@ -1,7 +1,5 @@
 # Avaliação e Métricas
 
-## Como Avaliar o Agente
-
 A avaliação do Norte foi realizada por meio de testes estruturados, verificando o comportamento do agente em diferentes situações de uso.
 
 Os testes foram utilizados para verificar principalmente:
