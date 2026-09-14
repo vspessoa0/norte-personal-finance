@@ -165,10 +165,6 @@ Os valores utilizados no exemplo são apenas ilustrativos.
 ```text
 norte-personal-finance/
 │
-├── assets/
-│
-├── data/
-│
 ├── docs/
 │   ├── 01-documentacao-agente.md
 │   ├── 02-base-conhecimento.md
