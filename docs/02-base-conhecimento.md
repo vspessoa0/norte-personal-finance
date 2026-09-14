@@ -15,8 +15,6 @@
 
 ## Adaptações nos Dados
 
-> Você modificou ou expandiu os dados mockados? Descreva aqui.
-
 Não são utilizados dados mockados. As informações financeiras são coletadas diretamente do usuário e estruturadas durante a sessão.
 
 ---
@@ -24,12 +22,10 @@ Não são utilizados dados mockados. As informações financeiras são coletadas
 ## Estratégia de Integração
 
 ### Como os dados são carregados?
-> Descreva como seu agente acessa a base de conhecimento.
 
 Os dados são coletados durante a conversa e armazenados em uma estrutura Python na memória da aplicação, permanecendo disponíveis apenas durante a sessão.
 
 ### Como os dados são usados no prompt?
-> Os dados vão no system prompt? São consultados dinamicamente?
 
 Os dados financeiros estruturados e os indicadores calculados pelo Python são inseridos dinamicamente no contexto enviado ao LLM para gerar respostas personalizadas.
 
