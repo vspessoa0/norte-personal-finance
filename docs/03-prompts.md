@@ -114,8 +114,6 @@ Para avaliar isso, preciso conhecer um pouco melhor sua situação. Qual é sua 
 
 ## Observações e Aprendizados
 
-> Registre aqui ajustes que você fez nos prompts e por quê.
-
 - O prompt foi estruturado para manter o agente dentro de um escopo específico de saúde financeira pessoal, evitando que assuntos externos ao domínio principal conduzam a conversa.
 - A definição da personalidade e do tom de voz contribuiu para uma comunicação mais natural, direta e acessível, sem que o agente precisasse se apresentar como uma pessoa.
 - Foi necessário diferenciar objetivos financeiros de assuntos relacionados a esses objetivos. Por exemplo, o usuário pode mencionar a compra de um carro como objetivo financeiro, mas o agente deve analisar apenas os aspectos financeiros desse objetivo, sem atuar como consultor automotivo.
