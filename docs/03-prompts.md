@@ -116,6 +116,15 @@ Para avaliar isso, preciso conhecer um pouco melhor sua situação. Qual é sua 
 
 > Registre aqui ajustes que você fez nos prompts e por quê.
 
-- O prompt foi estruturado para manter o agente dentro de um escopo financeiro específico.
-- A personalidade foi definida para manter uma comunicação natural sem fazer o agente fingir ser uma pessoa.
-- As análises dependem dos dados fornecidos pelo usuário e dos indicadores calculados pela aplicação.
+- O prompt foi estruturado para manter o agente dentro de um escopo específico de saúde financeira pessoal, evitando que assuntos externos ao domínio principal conduzam a conversa.
+- A definição da personalidade e do tom de voz contribuiu para uma comunicação mais natural, direta e acessível, sem que o agente precisasse se apresentar como uma pessoa.
+- Foi necessário diferenciar objetivos financeiros de assuntos relacionados a esses objetivos. Por exemplo, o usuário pode mencionar a compra de um carro como objetivo financeiro, mas o agente deve analisar apenas os aspectos financeiros desse objetivo, sem atuar como consultor automotivo.
+- O agente foi instruído a não inventar dados financeiros, preços, taxas ou outras informações factuais não fornecidas pelo usuário ou calculadas pela aplicação.
+- A extração de informações financeiras foi separada da geração da resposta. O LLM identifica dados presentes na mensagem e os retorna em formato estruturado, enquanto o Python valida e armazena essas informações.
+- Os dados financeiros permanecem disponíveis durante a sessão e são acumulados conforme novas informações são fornecidas pelo usuário.
+- O histórico da conversa é enviado ao LLM juntamente com os dados financeiros e os indicadores calculados, permitindo que o agente mantenha o contexto das interações anteriores.
+- O Python ficou responsável pelos cálculos financeiros determinísticos, como total de despesas, saldo mensal e comprometimento da renda. O LLM utiliza esses resultados para interpretar a situação e comunicá-la ao usuário.
+- Foi necessário orientar o modelo quanto à formatação das respostas, evitando o uso inadequado de LaTeX, código monoespaçado e links gerados pelo próprio modelo na interface.Foi necessário orientar o modelo quanto à formatação das respostas, evitando o uso inadequado de LaTeX, código monoespaçado e links gerados pelo próprio modelo na interface.
+- Os testes mostraram que ajustes no prompt podem ser utilizados para corrigir comportamentos indesejados do modelo sem a necessidade de aumentar a complexidade da aplicação.
+- Few-shot examples foram utilizados como referência para orientar comportamentos específicos, mantendo-os separados das regras principais do System Prompt.
+- A implementação demonstrou que a combinação entre regras de prompt, processamento determinístico em Python e contexto conversacional permite construir um agente mais previsível sem exigir uma arquitetura complexa.
